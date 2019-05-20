@@ -86,14 +86,15 @@ def get_name():
 def show_taoxin():
 	global root, B_SHOW_TAOXIN
 	if B_SHOW_TAOXIN:
-		show_right("", "全都答对了，那你该不会真的以为我啥奖励都不给你吧（＾ω＾）")
+		show_right("", "那你该不会真的以为我啥奖励都不给你吧（＾ω＾）")
 		show_right("", "猜猜是啥（＾ω＾）")
 		show_right("", "猜不到？（＾ω＾）")
 		show_right("", "还是猜不到？（＾ω＾）")
 
-		
+
 
 		show_right("", "t4")
+		show_right("", "t5")
 
 if __name__=="__main__":
 	
@@ -101,6 +102,9 @@ if __name__=="__main__":
 		"body1",
 		"body2",
 		"body3",
+		"body4",
+		"body5",
+		"body6",
 	]
 
 	DICT_QUESTION = [
