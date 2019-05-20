@@ -31,37 +31,45 @@ def set_main_box_msg(*args):
 		main_cancel_text.set(args[0][2])
 
 def start_game():
-	global score, B_SHOW_TAOXIN
+	global score, B_SHOW_TAOXIN, wrong_score
 	
 	n = 0
-	last_answer_res = True
+	# last_answer_res = True
 	while score < SCORE_ENDGAME and n < len(DICT_QUESTION):
-		
 		res = False
-		if n == 4:
+		if n == len(DICT_QUESTION) - 1:
 			res = show_question(title_msg = "这是一个超超超简单的问题", text_msg = DICT_QUESTION[n])
 		else:
 			res = show_question(text_msg = DICT_QUESTION[n])
 
 		if DICT_ANSWER[n] == res:
-			score += 2
-			show_right("", "%s\n可以可以，有那么点意思 (*^．^*) 親一個!!!\n你现在已经有 %d 分啦" % (get_name(), score))
-			last_answer_res = True
+			score += 1
+			
+			if n == len(DICT_QUESTION) - 1 and score >= SCORE_ENDGAME:
+				break
+
+			show_right("", "%s\n可以可以，有那么点意思 (*^．^*)親一個!!!\n你现在已经得到 %d 分啦" % (get_name(), score))
+			# last_answer_res = True
 		else:
-			score -= 2
-			if n == 4:
-				show_wrong("", "好好想想最后一道题该怎么回答哦，哪怕答错一道都没有奖励的哦ƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃ")
+			score -= 1
+			if n == len(DICT_QUESTION) - 1:
+				show_wrong("", "%s\n好好想想最后一道题该怎么回答哦，哪怕答错一道都没有奖励的哦ƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃ"% get_name())
 			else:
 				show_wrong("", "%s\n这么简单你都答不对（╯‵□′）╯︵┴─┴\n你现在只有 %d 分了哦" % (get_name(), score))
-			last_answer_res = False
+			
+			wrong_score += 1
+			# last_answer_res = False
 		n += 1
 	
 	# 结算
 	if score >= SCORE_ENDGAME:
-		show_info("", "行吧~行吧~ 居然全答对了，我颜面荡然无存，小看你了╮(－_－)╭")
+		show_info("", "行吧~行吧~ 居然全答对了，我布大才子的颜面尽失，无法在江湖立足了，小看你了╮(－_－)╭")
 		B_SHOW_TAOXIN = True
 
-		set_main_box_msg(["%s\n点右上角的叉关了游戏吧，赶紧去学雅思\n你说你都已经答完了，还恋恋不舍干嘛╮(－_－)╭" % get_name(), "重新玩一次", "程序员的浪漫是啥(￣﹁￣)"])
+		wrong_text = "%s\n点右上角的叉关了游戏吧，赶紧去学雅思\n你说都已经答完了，还恋恋不舍干嘛╮(－_－)╭" % get_name()
+		if wrong_score > 0:
+			wrong_text = "%s\n点右上角的叉关了游戏吧，赶紧去学雅思\n你说你答错 %d 次才全蒙对了，还恋恋不舍干嘛╮(－_－)╭" % (get_name(), wrong_score)
+		set_main_box_msg([wrong_text, "重新玩一次", "程序员的浪漫是啥？(￣﹁￣)"])
 	else:
 		show_info("", "t3")
 		score = 0
@@ -86,6 +94,9 @@ def show_wrong(title_msg = "", text_msg = "show_wrong"):
 def get_name():
 	return NAME_LIST[random.randint(0, len(NAME_LIST) - 1)]
 
+def inner_show_taoxin():
+	pass
+
 def show_taoxin():
 	global root, B_SHOW_TAOXIN
 	if B_SHOW_TAOXIN:
@@ -94,7 +105,7 @@ def show_taoxin():
 		show_right("", "猜不到？（＾ω＾）")
 		show_right("", "还是猜不到？（＾ω＾）")
 
-
+		inner_show_taoxin()
 
 		show_right("", "t4")
 		show_right("", "t5")
@@ -126,7 +137,8 @@ if __name__=="__main__":
 	]
 
 	score = 0
-	SCORE_ENDGAME = 10
+	wrong_score = 0
+	SCORE_ENDGAME = 5
 	B_SHOW_TAOXIN = False
 
 	# 居中
