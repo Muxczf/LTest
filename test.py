@@ -29,7 +29,7 @@ def set_main_box_msg(*args):
 	if args[0][2]:
 		main_cancel_text.set(args[0][2])
 
-def show_question(title_msg = "cc", text_msg = "xx"):
+def show_question(title_msg = "Ask question", text_msg = "xx"):
 	return tkMessageBox.askyesno(title_msg, text_msg)
 
 def show_right(title_msg = "right", text_msg = "xx"):
@@ -39,34 +39,38 @@ def show_wrong(title_msg = "wrong", text_msg = "xx"):
 	return tkMessageBox.showerror(title_msg, text_msg)
 
 def show_taoxin():
-	global B_SHOW_TAOXIN
+	global root, B_SHOW_TAOXIN
 	if B_SHOW_TAOXIN:
 		# xx
 		pass
+	
+	root.destroy()
 
 if __name__=="__main__":
 	
-	DICT_QUESTION = [["什么鬼", "ok", "cancel"],
-		["q1", "right", "wrong"],
-		["q1", "right", "wrong"],
-		["q1", "right", "wrong"],
-		["q1", "right", "wrong"],
-		["q1", "right", "wrong"],
+	DICT_QUESTION = [
+		"q1",
+		"q2",
+		"q3",
+		"q4",
+		"q5",
+		"q6",
 	]
 
-	DICT_ANSWER = [True,
+	DICT_ANSWER = [
 		True,
+		False,
 		True,
+		False,
 		True,
-		True,
-		True,
+		False,
 	]
 
 	score = 0
 	SCORE_ENDGAME = 10
 	B_SHOW_TAOXIN = False
 
-	# å±…ä¸­
+	# 居中
 	root = Tkinter.Tk()
 	w = 400
 	h = 80
@@ -86,7 +90,7 @@ if __name__=="__main__":
 		
 		n = 0
 		while score < SCORE_ENDGAME and n < len(DICT_QUESTION):
-			if DICT_ANSWER[n] == show_question(DICT_QUESTION[n]):
+			if DICT_ANSWER[n] == show_question(text_msg = DICT_QUESTION[n]):
 				score += 2
 				show_right("right", "cur_score %d" % score)
 			else:
@@ -94,7 +98,7 @@ if __name__=="__main__":
 				show_wrong("wrong", "cur_score %d" % score)
 			n += 1
 		
-		# ç»“ç®—
+		# 结算
 		if score >= SCORE_ENDGAME:
 			show_right("right", "all good")
 			B_SHOW_TAOXIN = True
@@ -103,14 +107,13 @@ if __name__=="__main__":
 
 	def end_game():
 		global root, B_SHOW_TAOXIN
+
 		show_right("last sup")
 
 		show_taoxin()
-
-		root.destroy()
 		# root.quit()
 
-	set_main_box_msg(DICT_QUESTION[0])
+	set_main_box_msg(["什么鬼", "开始", "结束"])
 	show_okcancel_msgbox(root, main_label_text, 
 		main_ok_text,
 		start_game, 
