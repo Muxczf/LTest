@@ -4,6 +4,8 @@ import Tkinter
 from Tkconstants import *
 import tkMessageBox
 import random
+from turtle import *
+from time import sleep
 
 def show_okcancel_msgbox(root, label_text, ok_text, ok_cb, cancel_text, cancel_cb):
 	if label_text:
@@ -95,7 +97,74 @@ def get_name():
 	return NAME_LIST[random.randint(0, len(NAME_LIST) - 1)]
 
 def inner_show_taoxin():
-	pass
+	def go_to(x, y):
+		up()
+		goto(x, y)
+		down()
+
+	def big_Circle(size):  #函数用于绘制心的大圆
+		speed(10)
+		for i in range(150):
+			forward(size)
+			right(0.3)
+
+	def small_Circle(size):  #函数用于绘制心的小圆
+		speed(10)
+		for i in range(210):
+			forward(size)
+			right(0.786)
+
+	def line(size):
+		speed(1)
+		forward(51*size)
+
+	def heart( x, y, size):
+		go_to(x, y)
+		left(150)
+		begin_fill()
+		line(size)
+		big_Circle(size)
+		small_Circle(size)
+		left(120)
+		small_Circle(size)
+		big_Circle(size)
+		line(size)
+		end_fill()
+
+	def arrow():
+		pensize(10)
+		setheading(0)
+		go_to(-400, 0)
+		left(15)
+		forward(150)
+		go_to(339, 178)
+		forward(150)
+
+	def arrowHead():
+		pensize(1)
+		speed(5)
+		color('red', 'red')
+		begin_fill()
+		left(120)
+		forward(20)
+		right(150)
+		forward(35)
+		right(120)
+		forward(35)
+		right(150)
+		forward(20)
+		end_fill()
+
+	pensize(2)
+	color('red', 'pink')
+	# getscreen().tracer(30, 0) # 取消注释后，快速显示图案
+	heart(200, 0, 1)
+	setheading(0)
+	heart(-80, -100, 1.5)
+	arrow()
+	arrowHead()
+	go_to(400, -300)
+	done()
 
 def show_taoxin():
 	global root, B_SHOW_TAOXIN
