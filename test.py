@@ -46,7 +46,7 @@ def show_taoxin():
 
 if __name__=="__main__":
 	
-	DICT_QUESTION = [["start", "ok", "cancel"],
+	DICT_QUESTION = [["什么鬼", "ok", "cancel"],
 		["q1", "right", "wrong"],
 		["q1", "right", "wrong"],
 		["q1", "right", "wrong"],
@@ -66,7 +66,7 @@ if __name__=="__main__":
 	SCORE_ENDGAME = 10
 	B_SHOW_TAOXIN = False
 
-	# 居中
+	# å±…ä¸­
 	root = Tkinter.Tk()
 	w = 400
 	h = 80
@@ -94,7 +94,7 @@ if __name__=="__main__":
 				show_wrong("wrong", "cur_score %d" % score)
 			n += 1
 		
-		# 结算
+		# ç»“ç®—
 		if score >= SCORE_ENDGAME:
 			show_right("right", "all good")
 			B_SHOW_TAOXIN = True
