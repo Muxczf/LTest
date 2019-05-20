@@ -50,7 +50,7 @@ def start_game():
 		else:
 			score -= 2
 			if n == 4:
-				show_wrong("", "好好想想最后一道题该怎么回答哦，答不对没有奖励哦ƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃ")
+				show_wrong("", "好好想想最后一道题该怎么回答哦，哪怕答错一道都没有奖励的哦ƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃ")
 			else:
 				show_wrong("", "%s\n这么简单你都答不对（╯‵□′）╯︵┴─┴\n你现在只有 %d 分了哦" % (get_name(), score))
 			last_answer_res = False
