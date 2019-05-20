@@ -36,7 +36,14 @@ def start_game():
 	n = 0
 	last_answer_res = True
 	while score < SCORE_ENDGAME and n < len(DICT_QUESTION):
-		if DICT_ANSWER[n] == show_question(text_msg = DICT_QUESTION[n]):
+		
+		res = False
+		if n == 4:
+			res = show_question(title_msg = "这是一个超超超简单的问题", text_msg = DICT_QUESTION[n])
+		else:
+			res = show_question(text_msg = DICT_QUESTION[n])
+
+		if DICT_ANSWER[n] == res:
 			score += 2
 			show_right("", "%s\n可以可以，有那么点意思 (*^．^*) 親一個!!!\n你现在已经有 %d 分啦" % (get_name(), score))
 			last_answer_res = True
@@ -50,6 +57,8 @@ def start_game():
 	if score >= SCORE_ENDGAME:
 		show_info("", "行吧~行吧~ 居然全答对了，我颜面荡然无存，小看你了╮(－_－)╭")
 		B_SHOW_TAOXIN = True
+
+		set_main_box_msg(["%s\n点右上角的叉关了游戏吧，赶紧去学雅思\n你说你都已经答完了，还恋恋不舍干嘛╮(－_－)╭" % get_name(), "重新玩一次", "程序员的浪漫是啥(￣﹁￣)"])
 	else:
 		show_info("", "t4")
 		score = 0
@@ -59,12 +68,10 @@ def end_game():
 
 	show_right("", "t2")
 
-	show_taoxin()
-
 def show_info(title_msg = "", text_msg = "show_info"):
 	return tkMessageBox.showinfo(title_msg, text_msg)
 
-def show_question(title_msg = "这是一个很简单的问题", text_msg = "show_question"):
+def show_question(title_msg = "", text_msg = "show_question"):
 	return tkMessageBox.askyesno(title_msg, text_msg)
 
 def show_right(title_msg = "", text_msg = "show_right"):
@@ -79,10 +86,12 @@ def get_name():
 def show_taoxin():
 	global root, B_SHOW_TAOXIN
 	if B_SHOW_TAOXIN:
-		show_right("", "你该不会以为我啥奖励都不给你吧（＾ω＾）")
+		show_right("", "全都答对了，那你该不会真的以为我啥奖励都不给你吧（＾ω＾）")
 		show_right("", "猜猜是啥（＾ω＾）")
 		show_right("", "猜不到？（＾ω＾）")
+		show_right("", "还是猜不到？（＾ω＾）")
 
+		
 
 		show_right("", "t4")
 
@@ -106,7 +115,7 @@ if __name__=="__main__":
 		True,
 		False,
 		True,
-		False,
+		True,
 		True,
 	]
 
@@ -117,7 +126,7 @@ if __name__=="__main__":
 	# 居中
 	root = Tkinter.Tk()
 	w = 400
-	h = 80
+	h = 120
 	ws = root.winfo_screenwidth()
 	hs = root.winfo_screenheight()
 	x = (ws/2) - (w/2)
