@@ -11,11 +11,11 @@ def show_okcancel_msgbox(root, label_text, ok_text, ok_cb, cancel_text, cancel_c
 		label.pack()
 	
 	if ok_text:
-		btn_ok = Tkinter.Button(root, textvariable = ok_text, command = ok_cb, width=20)
+		btn_ok = Tkinter.Button(root, textvariable = ok_text, command = ok_cb, width=25)
 		btn_ok.pack(side=LEFT)
 
 	if cancel_text:
-		btn_cancel = Tkinter.Button(root, textvariable = cancel_text, command = cancel_cb, width=20)
+		btn_cancel = Tkinter.Button(root, textvariable = cancel_text, command = cancel_cb, width=25)
 		btn_cancel.pack(side=RIGHT)
 
 def set_main_box_msg(*args):
