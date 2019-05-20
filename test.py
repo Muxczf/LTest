@@ -49,7 +49,10 @@ def start_game():
 			last_answer_res = True
 		else:
 			score -= 2
-			show_wrong("", "%s\n这么简单你都答不对（╯‵□′）╯︵┴─┴\n你现在只有 %d 分了哦" % (get_name(), score))
+			if n == 4:
+				show_wrong("", "好好想想最后一道题该怎么回答哦，答不对没有奖励哦ƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃƪ(‾ε‾“)ʃ")
+			else:
+				show_wrong("", "%s\n这么简单你都答不对（╯‵□′）╯︵┴─┴\n你现在只有 %d 分了哦" % (get_name(), score))
 			last_answer_res = False
 		n += 1
 	
@@ -60,7 +63,7 @@ def start_game():
 
 		set_main_box_msg(["%s\n点右上角的叉关了游戏吧，赶紧去学雅思\n你说你都已经答完了，还恋恋不舍干嘛╮(－_－)╭" % get_name(), "重新玩一次", "程序员的浪漫是啥(￣﹁￣)"])
 	else:
-		show_info("", "t4")
+		show_info("", "t3")
 		score = 0
 
 def end_game():
@@ -104,7 +107,6 @@ if __name__=="__main__":
 		"body3",
 		"body4",
 		"body5",
-		"body6",
 	]
 
 	DICT_QUESTION = [
