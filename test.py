@@ -164,6 +164,7 @@ def inner_show_taoxin():
 	arrow()
 	arrowHead()
 	go_to(400, -300)
+	write("test game", move=True, align="left", font=("宋体", 30, "normal"))
 	done()
 
 def show_taoxin():
